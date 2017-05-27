@@ -6,7 +6,7 @@ drop table sales_order1;
 
 create table product_master1(product_no varchar(6) primary key, description varchar(20) not null, profit_percent number(4,2) not null, unit_measure varchar(10) not null, sell_price number(8,2), cost_price number(8,2), CHECK (cost_price>=0), CHECK (sell_price>0));
 
-create table sales_order1(order_no varchar(6) primary key, client_no1 varchar(6), FOREIGN KEY (client_no1) REFERENCES client_master1(client_no), order_date date not null, dely_date date, order_status varchar(10), CHECK (dely_date>=order_date), constraint ck_order_status check(order_status in('In Process','Fulfilled','BackOrder','Cancelled')));
+create table sales_order1(order_no varchar(6) primary key, client_no1 varchar(6), FOREIGN KEY (client_no1) REFERENCES client_master1(client_no) on delete cascade, order_date date not null, dely_date date, order_status varchar(10), CHECK (dely_date>=order_date), constraint ck_order_status check(order_status in('In Process','Fulfilled','BackOrder','Cancelled')));
 
 select * from client_master1;
 
